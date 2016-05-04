@@ -31,7 +31,7 @@ class LedStrip
   end
 
   def led_color(led_number, color)
-    strip[led_number] = Ws2812::Color.new(color_to_array(color))
+    strip[led_number] = Ws2812::Color.new(*color_to_array(color))
   end
 
   def color_to_array(color)
