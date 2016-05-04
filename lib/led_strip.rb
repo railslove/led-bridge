@@ -1,5 +1,4 @@
 require 'ws2812'
-require 'colormath'
 
 # This file is called led_strip.rb
 # It contains the class LedStrip
@@ -16,9 +15,16 @@ class LedStrip
   def colors=(rgb_colors)
     rgb_colors.each.with_index do |color, index|
       next if color.nil? || color.empty?
-      color = format('#%02X%02X%02X', *color) if color.is_a? Array
+      if color.is_a? String
+        color = [
+          color[1..2].to_i(16),
+          color[3..4].to_i(16),
+          color[5..6].to_i(16)
+        ]
+      end
+      # color = format('#%02X%02X%02X', *color) if color.is_a? Array
 
-      led_color(index, ColorMath.hex_color(color))
+      led_color(index, color)
     end
 
     update
@@ -31,12 +37,6 @@ class LedStrip
   end
 
   def led_color(led_number, color)
-    strip[led_number] = Ws2812::Color.new(*color_to_array(color))
-  end
-
-  def color_to_array(color)
-    %i(red green blue).inject([]) do |result, color_part|
-      result << (color.public_send(color_part) * 255).to_i
-    end
+    strip[led_number] = Ws2812::Color.new(*color)
   end
 end

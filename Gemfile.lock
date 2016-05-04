@@ -3,6 +3,7 @@ GEM
   specs:
     colormath (0.1.2)
     diff-lcs (1.2.5)
+    rack (1.6.4)
     rspec (3.4.0)
       rspec-core (~> 3.4.0)
       rspec-expectations (~> 3.4.0)
@@ -22,6 +23,7 @@ PLATFORMS
 
 DEPENDENCIES
   colormath
+  rack
   rspec
 
 BUNDLED WITH

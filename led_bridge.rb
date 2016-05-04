@@ -13,13 +13,22 @@ config.each do |c|
 end
 
 led_strip = led_strips.first
-
+x = 60
+dir = 1
 loop do
   colors = []
+
   led_strip.length.times do |i|
-    colors[i] = [rand(255), rand(255), rand(255)]
+    colors[i] = [0, (x % 255), 0]
   end
 
+  if x == 255
+    dir = -1
+  elsif x == 60
+    dir = 1
+  end
+
+  x += dir
   led_strip.strip.colors = colors
-  sleep 0.125
+  # sleep 0.005
 end
