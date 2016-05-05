@@ -1,3 +1,6 @@
--
-  led_count: 25
-  led_pin: 18
+led_count: 25
+led_pin: 18
+
+leds_per_block: 11
+rows: 2
+columns: 2

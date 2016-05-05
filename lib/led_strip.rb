@@ -15,15 +15,6 @@ class LedStrip
   def colors=(rgb_colors)
     rgb_colors.each.with_index do |color, index|
       next if color.nil? || color.empty?
-      if color.is_a? String
-        color = [
-          color[1..2].to_i(16),
-          color[3..4].to_i(16),
-          color[5..6].to_i(16)
-        ]
-      end
-      # color = format('#%02X%02X%02X', *color) if color.is_a? Array
-
       led_color(index, color)
     end
 
@@ -37,6 +28,18 @@ class LedStrip
   end
 
   def led_color(led_number, color)
-    strip[led_number] = Ws2812::Color.new(*color)
+    strip.set led_number, *format_color(color)
+  end
+
+  def format_color(color)
+    if color.is_a? String
+      color = [
+        color[1..2].to_i(16),
+        color[3..4].to_i(16),
+        color[5..6].to_i(16)
+      ]
+    end
+
+    color
   end
 end
