@@ -28,7 +28,7 @@ run -> (env) {
   # only if gem is available
   if Gem::Specification.find_all_by_name('ws2812').any?
     strip = LedStrip.new config.led_count, config.led_pin
-    strip.colors color_array.colors
+    strip.colors = color_array.colors
   end
 
   Rack::Response.new({ status: 'ok', data: color_array.colors }.to_json, 200, 'Content-Type' => 'application/json')
